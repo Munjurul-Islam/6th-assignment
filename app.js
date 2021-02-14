@@ -75,7 +75,7 @@ const createSlider = () => {
   if(duration < 1000){
     alert('you must have to bigger then 1000ms')
   }
-  else{
+  if(duration >= 1000){
     sliders.forEach(slide => {
       let item = document.createElement('div')
       item.className = "slider-item";
@@ -89,6 +89,9 @@ const createSlider = () => {
       slideIndex++;
       changeSlide(slideIndex);
     }, duration);
+  }
+  else{
+    imagesArea.style.display = 'block';
   }
   
 }
@@ -130,8 +133,14 @@ searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search');
-  getImages(search.value)
-  sliders.length = 0;
+  
+  if(search.value < ' '){
+    alert('plz write some text')
+  }else{
+    getImages(search.value)
+    sliders.length = 0;
+  }
+  search.value = '';
 })
 
 sliderBtn.addEventListener('click', function () {
